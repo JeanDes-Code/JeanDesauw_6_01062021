@@ -1,5 +1,6 @@
 const Sauce = require('../models/sauce');
 const fs = require('fs');
+const { set } = require('mongoose');
 
 //Permet de créer une nouvelle sauce.
 exports.createSauce = (req, res, next) => {
@@ -19,8 +20,8 @@ exports.modifySauce = (req, res, next) => {
   {
     ...JSON.parse(req.body.sauce),
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-  } : { ...req.body } 
-  Sauce.updateOne({ _id: req.params.id })
+  } : { ...req.body }; 
+  Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id }) 
     .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
     .catch(error => res.status(400).json({ error }));
 };
@@ -29,7 +30,7 @@ exports.modifySauce = (req, res, next) => {
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then(sauce => {
-      const filename = sauce.imageURL.split(`/images/`)[1];
+      const filename = sauce.imageUrl.split(`/images/`)[1];
       fs.unlink(`images/${filename}`, () => {
         Sauce.deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: 'Sauce supprimée !' }))
@@ -55,46 +56,65 @@ exports.getAllSauces = (req, res, next) => {
 
 
 
-/*
+
 //Permet à un utilisateur de noter (j'aime / j'aime pas) une sauce.
 exports.likeSauce = (req, res, next) => {
-  if () // j'aime = 1
-    //
-    si userID déja dans UserLiked : ne rien faire
-    si userID déja dans UserDisliked : 
-        dislikes --
-        supprimer userId du tableau userDisliked
-      PUIS
-        modifier sauce :
-          likes++
-          ajouter userID au tableau userLiked
-    //
-  if () // j'aime = -1
-    //
-    si userID déja dans UserDisliked : ne rien faire
-    si userID déja dans UserLiked : 
-        likes --
-        supprimer userId du tableau userLiked
-      PUIS
-        modifier sauce :
-          dislikes++
-          ajouter userID au tableau userDisliked
-    //
-  if () // j'aime = 0
-    //
-    modifier sauce :
-      Vérifier si userId est présent dans UserLiked ou UserDisliked
-        Si UserLiked : 
-          likes--
-          supprimer UserID du tableau
-        Si UserLiked : 
-          dislikes --
-          supprimer UserID du tableau
-      ajouter userID au tableau userDisliked
-    //
-  Sauce.updateOne({ _id: req.params.id })
-    .then()
-    .catch();
-  
+  Sauce.findOne ({ _id: req.params.id })
+    .then((uniqueSauce) => {
+      const userID = req.body.userId;
+      const like = req.body.like;
+
+      Sauce.updateOne({ _id: req.params.id }, { $set: (() => {
+
+        if (like === 1) {
+
+          if (uniqueSauce.usersLiked.find((_userID) => _userID === userID)) {
+            //si l'utilisateur a déja liké la sauce , on ne fait rien
+            return;
+          }
+          return {
+            //on ajoute l'identifiant utilisateur au tableau et on ajoute 1 au nombre de like
+            usersLiked: [...uniqueSauce.usersLiked, userID],
+            likes: uniqueSauce.usersLiked.length + 1,
+          };
+        }
+
+        if (like === -1) {
+
+          if (uniqueSauce.usersDisliked.find((_userID) => _userID === userID)) {
+            //si l'utilisateur a déja disliké la sauce , on ne fait rien
+            return;
+          }
+          return {
+            //on ajoute l'identifiant utilisateur au tableau et on ajoute 1 au nombre de dislike
+            usersDisliked: [...uniqueSauce.usersDisliked, userID],
+            dislikes: uniqueSauce.usersDisliked.length + 1,
+          };
+        }
+
+        if (like === 0) {
+          //on supprime le statu 'liked' ou 'disliked' 
+          if (uniqueSauce.usersLiked.find((_userID) => _userID === userID)) {
+            return {
+              usersLiked: uniqueSauce.usersLiked.filter((_userID) => _userID !== userID),
+              likes: uniqueSauce.usersLiked.length - 1,
+            };
+          }
+
+          if (uniqueSauce.usersDisliked.find((_userID) => _userID === userID)) {
+            return {
+              usersDisliked: uniqueSauce.usersLiked.filter((_userID) => _userID !== userID),
+              dislikes: uniqueSauce.usersLiked.length - 1,
+            };
+          }
+        }
+
+        return;
+
+      })(),
+    })
+      .then(() => res.status(200).json({ message: "Actualisation du statut 'j'aime' de la sauce" }))
+      .catch((error) => res.status(409).json({ error }));
+    })
+    .catch((error) => res.status(400).json({ error }));
 };
-*/
