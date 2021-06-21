@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const sauceRoutes = require('./routes/sauce');
-const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce-routes');
+const userRoutes = require('./routes/user-routes');
 
 const app = express();
 mongoose.connect('mongodb+srv://jean:jean@sopekocko.h5o77.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
