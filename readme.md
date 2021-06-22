@@ -4,25 +4,27 @@ Mise en place :
 
 Dans un terminal depuis la racine du dépot :  
     "
-    cd frontend 
-    npm install (installation des dépendances)
-    npm start (après quelques instants la console devrait afficher "Compiled successfully.")
+            cd frontend 
+            npm install (installation des dépendances)
+            npm start (après quelques instants la console devrait afficher "Compiled successfully.")
     "
     
 Dans le dossier backend :
-    Dans un second terminal:
+   Dans un second terminal:
     "
-    npm install (installation des dépendances)
+            npm install (installation des dépendances)
     "
-    Ouvrir le fichier .env-exemple,
-    Remplir les différentes informations (DB_HOST, DB_USER, DB_PASS, TOKEN).
-    Renommer le fichier "mongoDB.env"
+   Ouvrir le fichier .env-exemple,
+   Remplir les différentes informations (DB_HOST, DB_USER, DB_PASS, TOKEN).
+   Renommer le fichier "mongoDB.env"
 
-    Puis dans ce second terminal :
+   Puis dans ce second terminal :
     "
-    nodemon start (la console devrait afficher "Connexion à MongoDB réussie !")
+            nodemon start (la console devrait afficher "Connexion à MongoDB réussie !")
     "
 
+    
+    
 Si vous n'avez pas de compte MongoDB vous pouvez me contactez pour tester l'app : desauwjean@gmail.com
 
 Rendez-vous sur "http://localhost:4200/" pour créer votre compte utilisateur.
