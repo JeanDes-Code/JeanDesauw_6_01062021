@@ -1,27 +1,33 @@
-So Peckocko - Plateforme de partage et de notation de sauces piquantes.
+**So Peckocko - Plateforme de partage et de notation de sauces piquantes.**
 
-Mise en place :
+*Mise en place :*
 
-Dans un terminal depuis la racine du dépot :  
-    "
-            cd frontend 
-            npm install (installation des dépendances)
-            npm start (après quelques instants la console devrait afficher "Compiled successfully.")
-    "
+*Dans un terminal depuis la racine du dépot :*
     
-Dans le dossier backend :
-   Dans un second terminal:
-    "
+    
+            cd frontend 
+    
             npm install (installation des dépendances)
-    "
+            
+            npm start (après quelques instants la console devrait afficher "Compiled successfully.")
+            
+    
+    
+*Dans le dossier backend :
+   Dans un second terminal:*
+    
+    
+            npm install (installation des dépendances)
+    
    Ouvrir le fichier .env-exemple,
    Remplir les différentes informations (DB_HOST, DB_USER, DB_PASS, TOKEN).
    Renommer le fichier "mongoDB.env"
 
-   Puis dans ce second terminal :
-    "
+  *Puis dans ce second terminal :*
+    
+    
             nodemon start (la console devrait afficher "Connexion à MongoDB réussie !")
-    "
+    
 
     
     
