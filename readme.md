@@ -21,7 +21,8 @@
     
    Ouvrir le fichier .env-exemple,
    Remplir les différentes informations (DB_HOST, DB_USER, DB_PASS, TOKEN).
-   Renommer le fichier "mongoDB.env"
+   (Le TOKEN doit être une chaîne de charactère complexe. Par exemple:"-QBj,$G!TQ/8>?1")
+   Renommer le fichier ".env".
 
   *Puis dans ce second terminal :*
     
