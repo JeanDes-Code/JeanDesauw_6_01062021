@@ -37,9 +37,9 @@ Si vous n'avez pas de compte MongoDB vous pouvez me contactez pour tester l'app 
 Rendez-vous sur "http://localhost:4200/" pour créer votre compte utilisateur.
 
 **NB** : Plusieurs règles sont à respecter pour le mot de passe : 
-                    - entre 8 et 120 signes
-                    - pas d'espace
-                    - au minimum une lettre minuscule
-                    - au minimum une lettre majuscule
-                    - au minimum un chiffre
-                    - au minimum un des symboles suivant $ @ % * + - _ ! 
+  - entre 8 et 120 signes
+  - pas d'espace              
+  - au minimum une lettre minuscule
+  - au minimum une lettre majuscule
+  - au minimum un chiffre
+  - au minimum un des symboles suivant $ @ % * + - _ ! 
