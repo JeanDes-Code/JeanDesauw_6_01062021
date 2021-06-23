@@ -32,7 +32,7 @@
 
     
     
-Si vous n'avez pas de compte MongoDB vous pouvez me contactez pour tester l'app : desauwjean@gmail.com
+Si vous n'avez pas de compte MongoDB vous pouvez me contacter pour tester l'app : desauwjean@gmail.com
 
 Rendez-vous sur "http://localhost:4200/" pour créer votre compte utilisateur.
 
@@ -42,4 +42,4 @@ Rendez-vous sur "http://localhost:4200/" pour créer votre compte utilisateur.
   - au minimum une lettre minuscule
   - au minimum une lettre majuscule
   - au minimum un chiffre
-  - au minimum un des symboles suivant $ @ % * + - _ ! 
+  - au minimum un des symboles spéciaux suivant :  $ @ % * + - _ !
