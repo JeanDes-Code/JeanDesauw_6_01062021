@@ -6,7 +6,7 @@ const password = process.env.DB_PASS;
 
 // Modules principaux
 const mongoose = require('mongoose');
-const express = require('express');
+const express = require('express'); //Framework facilitant le développement d'application
 const app = express();
 const path = require('path');
 

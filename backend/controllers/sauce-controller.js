@@ -1,4 +1,5 @@
 const Sauce = require('../models/sauce');
+const likeEnum = require ("../enum/like-enum");
 const fs = require('fs');
 
 //Permet de créer une nouvelle sauce.
@@ -59,7 +60,7 @@ exports.getAllSauces = (req, res, next) => {
 //Permet à un utilisateur de noter (j'aime / j'aime pas) une sauce.
 exports.likeSauce = (req, res, next) => {
   switch (req.body.like) {
-    case 0: //like = 0 (renvoyé par le front)
+    case likeEnum.neutral: //like = 0 (renvoyé par le front)
       Sauce.findOne({ _id: req.params.id })//Récupération de la sauce
         .then((sauce) => {
           //L'utilisateur aime déja la sauce
@@ -72,35 +73,25 @@ exports.likeSauce = (req, res, next) => {
                 _id: req.params.id,
               }
             )
-              .then(() => {
-                res.status(201).json({ message: "Ton avis a été pris en compte!" });
-              })
-              .catch((error) => {
-                res.status(400).json({ error: error });
-              });
+              .then(() => res.status(201).json({ message: "Ton avis a été pris en compte!" }))
+              .catch((error) => res.status(400).json({ error: error }));
           }
           if (sauce.usersDisliked.find((user) => user === req.body.userId)) {
             Sauce.updateOne(
-              { _id: req.params.id },
+              { _id: req.params.id },//
               {
                 $inc: { dislikes: -1 },//On retire le dislike du nombre de dislikes
                 $pull: { usersDisliked: req.body.userId },//On retire le User ID du tableau userDisliked
                 _id: req.params.id,
               }
             )
-              .then(() => {
-                res.status(201).json({ message: "Ton avis a été pris en compte!" });
-              })
-              .catch((error) => {
-                res.status(400).json({ error: error });
-              });
+              .then(() => res.status(201).json({ message: "Ton avis a été pris en compte!" }))
+              .catch((error) => res.status(400).json({ error: error }));
           }
         })
-        .catch((error) => {
-          res.status(404).json({ error: error });
-        });
+        .catch((error) => res.status(404).json({ error: error }));
       break;
-    case 1: //like = 1 (renvoyé par le front)
+    case likeEnum.like: //like = 1 (renvoyé par le front)
       Sauce.updateOne(
         { _id: req.params.id },
         {
@@ -109,14 +100,10 @@ exports.likeSauce = (req, res, next) => {
           _id: req.params.id,
         }
       )
-        .then(() => {
-          res.status(201).json({ message: "Ton like a été pris en compte!" });
-        })
-        .catch((error) => {
-          res.status(400).json({ error: error });
-        });
+        .then(() => res.status(201).json({ message: "Ton like a été pris en compte!" }))
+        .catch((error) => res.status(400).json({ error: error }));
       break;
-    case -1: //like = -1 (renvoyé par le front)
+    case likeEnum.dislike: //like = -1 (renvoyé par le front)
       Sauce.updateOne(
         { _id: req.params.id },
         {
@@ -125,12 +112,8 @@ exports.likeSauce = (req, res, next) => {
           _id: req.params.id,
         }
       )
-        .then(() => {
-          res.status(201).json({ message: "Ton dislike a été pris en compte!" });
-        })
-        .catch((error) => {
-          res.status(400).json({ error: error });
-        });
+        .then(() => res.status(201).json({ message: "Ton dislike a été pris en compte!" }))
+        .catch((error) => res.status(400).json({ error: error }));
       break;
     default:
       console.error("mauvaise requête");
