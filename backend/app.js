@@ -1,9 +1,8 @@
 //Variables d'environnement :
-require("dotenv").config({ path: 'mongoDB.env'});
+require("dotenv").config({ path: '.env' });
 const host = process.env.DB_HOST;
 const username = process.env.DB_USER;
 const password = process.env.DB_PASS;
-
 
 // Modules principaux
 const mongoose = require('mongoose');
@@ -14,14 +13,13 @@ const path = require('path');
 //Modules Sécurité
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require('helmet');
-//Rate limit (limitation du nombre de requêtes) pourra être géré par l'hébergeur
+//Rate limit (limitation du nombre de requêtes)
 const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
-  windowMs: 600000, //10minutes
-  max: 100,
-  message: "Too many requests were made from this IP, please try again later." //on limite chaque IP à 100 requêtes max par 10minutes 
+  windowMs: 10 * 60 * 1000, //10minutes
+  max: 100, //on limite chaque IP à 100 requêtes max par 10minutes (i.e 10requêtes/min)
+  message: "Too many requests were made from this IP, please try again later." 
 })
-
 
 //Connection à la BDD MongoDB
 mongoose.connect(`mongodb+srv://${username}:${password}@${host}`,
