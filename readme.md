@@ -22,7 +22,7 @@
    - Ouvrir le fichier .env-exemple,
    - Remplir les différentes informations (DB_HOST, DB_USER, DB_PASS, TOKEN).
    (Le TOKEN doit être une chaîne de charactère complexe. Par exemple:"-QBj,$G!TQ/8>?1")
-   - Renommer le fichier ".env".
+   - Sauvergarder et renommer le fichier ".env-exemple" en ".env".
 
    #### Puis dans ce second terminal :
     
