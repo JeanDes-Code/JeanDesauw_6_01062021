@@ -3,7 +3,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const bcrypt = require('bcrypt'); //Permet de Hasher le mot de passe
 const regex = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,120})$/); //Permettra de vérifier le niveau de sécurité du mot de passe
-const SALT_WORK_FACTOR = 10; //Il s'agit du coefficient de 'hashage' utilisé pour "saler" le mot de passe
+const SALT_WORK_FACTOR = 10; //Il s'agit du coefficient de 'hashage' utilisé pour crypter le mot de passe
 
 //Schéma type de l'objet User qui sera enregistré sur la BDD
 const userSchema = mongoose.Schema({
