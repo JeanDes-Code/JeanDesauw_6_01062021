@@ -5,15 +5,18 @@ const sauceCtrl = require('../controllers/sauce-controller');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
-router.post('/',auth, multer, sauceCtrl.createSauce);//valid
+//Routes CRUD pour les sauces 
+
+//CREATE
+router.post('/', auth, multer, sauceCtrl.createSauce);
 router.post('/:id/like', auth, sauceCtrl.likeSauce);
-
-router.get('/', auth, sauceCtrl.getAllSauces);//valid
-router.get('/:id', auth, sauceCtrl.getOneSauce);//valid
-
-router.put('/:id', auth, multer, sauceCtrl.modifySauce);//valid
-
-router.delete('/:id', auth, sauceCtrl.deleteSauce);//valid
+//READ
+router.get('/', auth, sauceCtrl.getAllSauces);
+router.get('/:id', auth, sauceCtrl.getOneSauce);
+//UPDATE
+router.put('/:id', auth, multer, sauceCtrl.modifySauce);
+//DELETE
+router.delete('/:id', auth, sauceCtrl.deleteSauce);
 
 
 
